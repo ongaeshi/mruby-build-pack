@@ -1,3 +1,4 @@
+MRUBY_VERSION = "1.1.0"
 HOST_PLATFORM = "osx"
 
 require 'fileutils'
@@ -5,7 +6,7 @@ require 'fileutils'
 task :clone do
   FileUtils.mkdir_p "repo"
   Dir.chdir "repo" do
-    sh "git clone -b 1.1.0 https://github.com/mruby/mruby.git"
+    sh "git clone -b #{MRUBY_VERSION} https://github.com/mruby/mruby.git"
   end
 end
 
