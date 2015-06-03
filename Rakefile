@@ -1,3 +1,5 @@
+HOST_PLATFORM = "osx"
+
 require 'fileutils'
 
 task :clone do
@@ -12,9 +14,21 @@ task :build do
     # TODO: DISABLE_GEMS
     sh "rake"
   end
+
+  FileUtils.mkdir_p "src"
+  FileUtils.cp Dir.glob("repo/mruby/src/*.c"), "src"
+  FileUtils.cp Dir.glob("repo/mruby/build/host/src/*.c"), "src"
+
+  FileUtils.cp_r "repo/mruby/include", "."
+
+  dst = "bin/#{HOST_PLATFORM}"
+  FileUtils.mkdir_p dst
+  FileUtils.cp "repo/mruby/bin/mrbc", dst
 end
 
 task :clean do
+  FileUtils.rm_rf ["bin", "include", "src"] # Double clean test
+  
   Dir.chdir "repo/mruby" do
     sh "rake clean"
   end
