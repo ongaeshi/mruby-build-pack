@@ -28,7 +28,7 @@ task :build do
 end
 
 task :clean do
-  FileUtils.rm_rf ["bin", "include", "src"] # Double clean test
+  FileUtils.rm_rf ["bin", "include", "src"]
   
   Dir.chdir "repo/mruby" do
     sh "rake clean"
